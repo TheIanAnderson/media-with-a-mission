@@ -8,9 +8,9 @@ import Contact from './pages/Contact';
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white text-black overflow-x-hidden md:pr-64">
       <Sidebar />
-      <main className="flex-grow overflow-y-auto">
+      <main className="overflow-y-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/our-work" element={<OurWork />} />
