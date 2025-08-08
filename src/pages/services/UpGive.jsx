@@ -1,5 +1,5 @@
 import { motion as Motion } from 'framer-motion';
-import Button from '../components/ui/Button';
+import Button from '../../components/ui/Button';
 
 export default function UpGive() {
   return (

@@ -9,8 +9,41 @@
   }
   body {
     @apply bg-bg text-text antialiased;
+    transition: background-color var(--transition), color var(--transition);
   }
   h1,h2,h3,h4,h5,h6{
     font-family:'Inter Tight', 'Inter', system-ui, sans-serif;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(1rem);
+  background: var(--card);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 100;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-success {
+  border-color: var(--ok);
+}
+.toast-error {
+  border-color: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    transition: none;
   }
 }

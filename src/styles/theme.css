@@ -1,12 +1,44 @@
 :root {
-  --bg:#0b0b0c;
-  --surface:#121214;
-  --card:#141416;
-  --text:#f7f7f7;
-  --muted:#b7b7ba;
-  --brand:#ffd84d;
-  --brand-ink:#181818;
-  --border:#232427;
-  --ok:#34d399;
-  --info:#60a5fa;
+  color-scheme: light dark;
+  --transition: 200ms ease-in-out;
+}
+
+[data-theme='light'] {
+  --bg: #ffffff;
+  --surface: #f5f5f7;
+  --card: #f0f0f2;
+  --text: #181818;
+  --muted: #555555;
+  --brand: #ffd84d;
+  --brand-ink: #181818;
+  --border: #e4e4e7;
+  --ok: #34d399;
+  --info: #60a5fa;
+  --danger: #f87171;
+}
+
+[data-theme='dark'] {
+  --bg: #0b0b0c;
+  --surface: #121214;
+  --card: #141416;
+  --text: #f7f7f7;
+  --muted: #b7b7ba;
+  --brand: #ffd84d;
+  --brand-ink: #181818;
+  --border: #232427;
+  --ok: #34d399;
+  --info: #60a5fa;
+  --danger: #f87171;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    transition: none;
+  }
 }
