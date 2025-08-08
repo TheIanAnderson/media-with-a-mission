@@ -5,11 +5,6 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export async function insertLead(payload) {
-  const { error } = await supabase.from('leads').insert(payload);
-  if (error) throw error;
-}
-
 export async function getCaseList() {
   try {
     const { data, error } = await supabase

@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import logo from '../assets/logo.svg';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -32,13 +33,16 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <button
-          className="md:hidden text-text"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X /> : <Menu />}
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="md:hidden text-text"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
       {open && (
         <div className="md:hidden bg-bg border-t border-border px-4 pb-4">

@@ -1,21 +1,35 @@
 import { useState } from 'react';
 import Button from '../components/ui/Button';
-import { insertLead } from '../lib/supabase';
+import { createLead } from '../lib/leads';
+import { toast } from '../lib/toast';
 
 export default function Contact() {
-  const [status, setStatus] = useState(null);
+  const services = [
+    'Story-Driven Video',
+    'Web Tools & Sites',
+    'UpGive: Event Giving Display',
+  ];
+  const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
     const form = new FormData(e.target);
     const payload = Object.fromEntries(form.entries());
+    const selected = form.getAll('services');
+    if (selected.length === 0) {
+      toast('Select at least one service', 'error');
+      return;
+    }
     try {
-      await insertLead(payload);
-      setStatus('success');
+      setSubmitting(true);
+      await createLead({ ...payload, services: selected });
       e.target.reset();
+      toast("Thanks! We'll be in touch.", 'success');
     } catch (err) {
       console.error(err);
-      setStatus('error');
+      toast('Something went wrong. Try again.', 'error');
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -51,24 +65,19 @@ export default function Contact() {
           placeholder="Project description"
           className="w-full p-3 rounded bg-surface border border-border"
         />
-        <input
-          name="budget_range"
-          placeholder="Budget range"
-          className="w-full p-3 rounded bg-surface border border-border"
-        />
-        <input
-          name="timeline"
-          placeholder="Timeline"
-          className="w-full p-3 rounded bg-surface border border-border"
-        />
-        <Button type="submit">Submit</Button>
+        <fieldset className="space-y-2">
+          <legend className="font-medium">Which services are you interested in?</legend>
+          {services.map((s) => (
+            <label key={s} className="flex items-center gap-2 text-sm">
+              <input type="checkbox" name="services" value={s} />
+              <span>{s}</span>
+            </label>
+          ))}
+        </fieldset>
+        <Button type="submit" disabled={submitting}>
+          {submitting ? 'Submitting...' : 'Submit'}
+        </Button>
       </form>
-      {status === 'success' && (
-        <p className="mt-4 text-ok">Thanks! We'll be in touch.</p>
-      )}
-      {status === 'error' && (
-        <p className="mt-4 text-red-400">Something went wrong. Try again.</p>
-      )}
     </section>
   );
 }
