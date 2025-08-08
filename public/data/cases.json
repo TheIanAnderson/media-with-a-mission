@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "slug": "school-supplies-drive",
+    "title": "School Supplies Drive",
+    "summary": "Mobilizing community donors for classrooms.",
+    "tags": ["video", "fundraising"],
+    "hero_url": "/images/cases/school.jpg",
+    "metrics": {"views": 12500, "donations": 45000, "conversion_lift": 0.32},
+    "body": "## Problem\nSchools lacked supplies.\n\n## Approach\nWe shot a short doc.\n\n## Outcome\nNew donors boosted support.",
+    "created_at": "2024-01-01"
+  },
+  {
+    "id": 2,
+    "slug": "nonprofit-rebrand",
+    "title": "Nonprofit Rebrand",
+    "summary": "Modernizing identity and digital presence.",
+    "tags": ["web", "brand"],
+    "hero_url": "/images/cases/rebrand.jpg",
+    "metrics": {"views": 8000, "donations": 20000, "conversion_lift": 0.21},
+    "body": "## Problem\nBrand fatigue.\n\n## Approach\nDelivered vibrant visuals.\n\n## Outcome\nEngagement climbed.",
+    "created_at": "2024-02-15"
+  },
+  {
+    "id": 3,
+    "slug": "upgive-gala",
+    "title": "UpGive Gala",
+    "summary": "Gamified giving at a live event.",
+    "tags": ["upgive", "event"],
+    "hero_url": "/images/cases/gala.jpg",
+    "metrics": {"views": 4000, "donations": 75000, "conversion_lift": 0.45},
+    "body": "## Problem\nStagnant gala donations.\n\n## Approach\nUsed UpGive displays.\n\n## Outcome\nRecord-breaking gifts.",
+    "created_at": "2024-03-10"
+  }
+]
