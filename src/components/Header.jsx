@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.svg';
+import logo from '../assets/MWM-logo-light-mode.png';
 import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
