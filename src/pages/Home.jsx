@@ -1,9 +1,25 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Button from '../components/ui/Button';
 import OrbsBackground from '../components/OrbsBackground';
+import logoLight from '../assets/MWM-logo-light-mode.png';
+import logoDark from '../assets/MWM-logo-dark-mode.png';
 
 export default function Home() {
-  const showMission = true; // toggle to show mission statement vs boilerplate
+  const [theme, setTheme] = useState(
+    () => document.documentElement.dataset.theme || 'light',
+  );
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handler = (e) => setTheme(e.detail);
+    window.addEventListener('themechange', handler);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('themechange', handler);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
   const services = [
     {
       title: 'Story-Driven Video',
@@ -18,7 +34,7 @@ export default function Home() {
     {
       title: 'UpGive: Event Giving Display',
       tagline: 'Gamified giving displays for events.',
-      href: '/upgive',
+      href: '/services/upgive',
     },
   ];
   const showcase = [
@@ -38,47 +54,59 @@ export default function Home() {
       image: 'https://picsum.photos/seed/3/400/300',
     },
   ];
+  const logoSrc = theme === 'dark' ? logoDark : logoLight;
   return (
     <div>
       <section className="relative overflow-hidden py-32 text-center">
         <OrbsBackground />
+        <Link
+          to="/"
+          className={
+            scrolled
+              ? 'fixed top-4 left-4 h-8 w-auto z-50 transition-all duration-300'
+              : 'mx-auto mb-6 h-64 w-auto transition-all duration-300'
+          }
+        >
+          <img src={logoSrc} alt="Media with a Mission" className="h-full w-auto" />
+        </Link>
         <div className="relative z-10 space-y-6 px-4">
-          {showMission ? (
-            <h1 className="text-5xl font-display font-bold">
-              Storytelling for Impact
-            </h1>
-          ) : (
-            <p className="max-w-xl mx-auto text-lg text-muted">
-              Media with a Mission partners with nonprofits to amplify change
-              through cinematic video and web tools.
-            </p>
-          )}
+          <h1 className="text-5xl font-display font-bold">
+            Storytelling for Impact
+          </h1>
+          <p className="max-w-xl mx-auto text-lg text-muted">
+            Media with a Mission partners with nonprofits to amplify change
+            through cinematic video and web tools.
+          </p>
           <Button as={Link} to="/contact" variant="primary">
             Start a Project
           </Button>
         </div>
       </section>
-      <div aria-hidden="true" className="h-16 bg-brand -skew-y-1" />
-      <section className="py-24 px-4 text-center max-w-6xl mx-auto" id="services">
-        <h2 className="text-4xl font-display mb-2">Services</h2>
-        <p className="text-muted mb-8">How we can help.</p>
-        <div className="grid gap-6 sm:grid-cols-3 text-left">
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className="bg-card border border-border rounded-lg p-6 flex flex-col"
-            >
-              <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
-              <p className="text-muted flex-grow">{s.tagline}</p>
-              <Button
-                as={Link}
-                to={s.href}
-                className="mt-4 transform transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+      <section
+        className="py-24 px-4 text-center bg-brand text-brand-ink"
+        id="services"
+      >
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-display mb-2">Services</h2>
+          <p className="mb-8">How we can help.</p>
+          <div className="grid gap-6 sm:grid-cols-3 text-left">
+            {services.map((s) => (
+              <div
+                key={s.title}
+                className="bg-card border border-border rounded-lg p-6 flex flex-col"
               >
-                Learn More
-              </Button>
-            </div>
-          ))}
+                <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
+                <p className="text-muted flex-grow">{s.tagline}</p>
+                <Button
+                  as={Link}
+                  to={s.href}
+                  className="mt-4 transform transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                >
+                  Learn More
+                </Button>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <section className="py-24 px-4 bg-surface">

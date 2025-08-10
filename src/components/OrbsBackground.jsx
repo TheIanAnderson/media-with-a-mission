@@ -23,7 +23,7 @@ export default function OrbsBackground() {
                   y: [0, -20, 0],
                 }
           }
-          transition={{ repeat: Infinity, duration: o.duration }}
+          transition={{ repeat: Infinity, duration: o.duration, repeatType: 'reverse' }}
         />
       ))}
     </div>
