@@ -59,15 +59,6 @@ export default function Home() {
     <div>
       <section className="relative overflow-hidden py-32 text-center">
         <OrbsBackground />
-        <img
-          src={logoSrc}
-          alt="Media with a Mission"
-          className={
-            scrolled
-              ? 'fixed top-4 right-4 w-16 z-50 transition-all duration-300'
-              : 'mx-auto mb-6 w-64 transition-all duration-300'
-          }
-        />
         <div className="relative z-10 space-y-6 px-4">
           <h1 className="text-5xl font-display font-bold">
             Storytelling for Impact
