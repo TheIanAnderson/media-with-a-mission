@@ -63,11 +63,11 @@ export default function Home() {
           to="/"
           className={
             scrolled
-              ? 'fixed top-4 left-4 w-16 z-50 transition-all duration-300'
-              : 'mx-auto mb-6 w-64 transition-all duration-300'
+              ? 'fixed top-4 left-4 h-8 w-auto z-50 transition-all duration-300'
+              : 'mx-auto mb-6 h-64 w-auto transition-all duration-300'
           }
         >
-          <img src={logoSrc} alt="Media with a Mission" className="w-full" />
+          <img src={logoSrc} alt="Media with a Mission" className="h-full w-auto" />
         </Link>
         <div className="relative z-10 space-y-6 px-4">
           <h1 className="text-5xl font-display font-bold">
