@@ -6,14 +6,17 @@ const data = {
   'Story-Driven Video': {
     desc: 'Short films that move people to act.',
     bullets: ['Raise awareness', 'Boost donations', 'Share your mission'],
+    pricing: '/pricing/video',
   },
   'Web Tools & Sites': {
     desc: 'Squarespace or Next.js sites focused on outcomes.',
     bullets: ['Fast launch', 'Metrics tracking', 'Flexible CMS'],
+    pricing: '/pricing/web',
   },
   'UpGive: Event Giving Display': {
     desc: 'Gamified giving displays for events.',
     bullets: ['Real-time tally', 'Leaderboards', 'Audience engagement'],
+    pricing: '/pricing/upgive',
   },
 };
 
@@ -31,6 +34,9 @@ export default function Services() {
             <li key={b}>{b}</li>
           ))}
         </ul>
+        <Button as="a" href={current.pricing} variant="secondary">
+          See Pricing
+        </Button>
         <Button as="a" href="/contact">Start a Project</Button>
       </div>
     </section>

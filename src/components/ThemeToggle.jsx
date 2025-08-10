@@ -13,6 +13,7 @@ export default function ThemeToggle() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem('theme', theme);
+    window.dispatchEvent(new CustomEvent('themechange', { detail: theme }));
   }, [theme]);
 
   const toggle = () => setTheme(theme === 'light' ? 'dark' : 'light');
