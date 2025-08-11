@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <div>
       <Hero ref={heroRef} title={site.hero.headline} subtitle={site.hero.subtext} />
-      <Section className="bg-surface">
+      <Section className="angled-section">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-display font-bold text-center mb-10">Services</h2>
           <div className="grid gap-6 md:grid-cols-3">
