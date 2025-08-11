@@ -87,6 +87,7 @@ export default function Home() {
   const logoSrc = theme === 'dark' ? logoDark : logoLight;
   return (
     <div>
+      <section className="relative overflow-hidden pt-32 pb-32 text-center">
         <OrbsBackground />
         <div className="relative z-10 flex flex-col items-center space-y-6 px-4">
           <div
