@@ -57,6 +57,15 @@ export default function Home() {
   const logoSrc = theme === 'dark' ? logoDark : logoLight;
   return (
     <div>
+      <img
+        src={logoSrc}
+        alt="Media with a Mission"
+        className={`fixed z-40 transition-all duration-500 transform ${
+          scrolled
+            ? 'top-3 left-3 w-8 opacity-0 pointer-events-none'
+            : 'top-1/2 left-1/2 w-48 -translate-x-1/2 -translate-y-1/2 opacity-100'
+        }`}
+      />
       <section className="relative overflow-hidden py-32 text-center">
         <OrbsBackground />
         <div className="relative z-10 space-y-6 px-4">
