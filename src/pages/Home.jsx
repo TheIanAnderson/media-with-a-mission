@@ -21,6 +21,13 @@ export default function Home() {
       document.body.classList.add('logo-pinned');
       return;
     }
+    const hero = heroRef.current;
+    const heading = hero.querySelector('h1');
+    const logo = document.querySelector('.logo-lockup img');
+    const offset =
+      heading && logo
+        ? heading.offsetTop - logo.getBoundingClientRect().height - 16
+        : 0;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -29,9 +36,9 @@ export default function Home() {
           document.body.classList.add('logo-pinned');
         }
       },
-      { threshold: 0.9 }
+      { rootMargin: `-${offset}px 0px 0px 0px` }
     );
-    observer.observe(heroRef.current);
+    observer.observe(hero);
     return () => observer.disconnect();
   }, []);
 
