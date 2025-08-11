@@ -29,7 +29,7 @@ export default function Home() {
           document.body.classList.add('logo-pinned');
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.9 }
     );
     observer.observe(heroRef.current);
     return () => observer.disconnect();
@@ -48,7 +48,7 @@ export default function Home() {
           </div>
         </div>
       </Section>
-      <Section>
+      <Section className="angled-section">
         <div className="max-w-3xl mx-auto text-center space-y-4">
           <h2 className="text-3xl font-display font-bold">About Us</h2>
           <p className="text-muted text-lg">{site.about}</p>
