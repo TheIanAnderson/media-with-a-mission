@@ -12,7 +12,7 @@ export default function LogoLockup() {
       aria-label="Media with a Mission"
       className="logo-lockup fixed z-50 transition-transform duration-300 ease-out"
     >
-      <img src={src} alt="Media with a Mission" className="w-96 h-auto" />
+      <img src={src} alt="Media with a Mission" className="w-96 h-auto glow" />
     </Link>
   );
 }

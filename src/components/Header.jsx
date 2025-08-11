@@ -16,7 +16,7 @@ export default function Header() {
 
   const nav = navItems;
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-bg/80 backdrop-blur border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-bg/80 backdrop-blur border-b border-border shadow-md">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-24">
         <div className="w-28 h-24" aria-hidden="true" />
         <nav className="hidden md:flex gap-6">
@@ -25,7 +25,9 @@ export default function Header() {
               key={n.path}
               to={n.path}
               className={({ isActive }) =>
-                `hover:text-brand ${isActive ? 'text-brand' : 'text-muted'}`
+                `hover:text-brand transition-colors ${
+                  isActive ? 'text-brand' : 'text-muted'
+                }`
               }
             >
               {n.label}
