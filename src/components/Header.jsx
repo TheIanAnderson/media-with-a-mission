@@ -9,6 +9,13 @@ import useTheme from '../hooks/useTheme';
 export default function Header() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll);
+    return () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
