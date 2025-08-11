@@ -17,8 +17,8 @@ export default function Header() {
   const nav = navItems;
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-bg/80 backdrop-blur border-b border-border">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-16">
-        <div className="w-32 h-8" aria-hidden="true" />
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-24">
+        <div className="w-28 h-24" aria-hidden="true" />
         <nav className="hidden md:flex gap-6">
           {nav.map((n) => (
             <NavLink
