@@ -1,83 +1,44 @@
 import { useState } from 'react';
+import Section from '../components/Section';
 import Button from '../components/ui/Button';
-import { createLead } from '../lib/leads';
-import { toast } from '../lib/toast';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function Contact() {
-  const services = [
-    'Story-Driven Video',
-    'Web Tools & Sites',
-    'UpGive: Event Giving Display',
-  ];
-  const [submitting, setSubmitting] = useState(false);
+  usePageMeta({ title: 'Contact | Media with a Mission' });
+  const [sent, setSent] = useState(false);
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    const form = new FormData(e.target);
-    const payload = Object.fromEntries(form.entries());
-    const selected = form.getAll('services');
-    if (selected.length === 0) {
-      toast('Select at least one service', 'error');
-      return;
-    }
-    try {
-      setSubmitting(true);
-      await createLead({ ...payload, services: selected });
-      e.target.reset();
-      toast("Thanks! We'll be in touch.", 'success');
-    } catch (err) {
-      console.error(err);
-      toast('Something went wrong. Try again.', 'error');
-    } finally {
-      setSubmitting(false);
-    }
+    setSent(true);
   }
 
   return (
-    <section className="max-w-xl mx-auto py-24 px-4">
-      <h1 className="text-4xl font-display text-center mb-8">Start a Project</h1>
+    <Section className="max-w-xl mx-auto">
+      <h1 className="text-3xl sm:text-4xl font-display font-bold text-center mb-6">Start a Project</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
-          name="name"
           required
+          name="name"
           placeholder="Name"
           className="w-full p-3 rounded bg-surface border border-border"
         />
         <input
-          name="org"
-          placeholder="Organization"
-          className="w-full p-3 rounded bg-surface border border-border"
-        />
-        <input
-          name="email"
-          type="email"
           required
+          type="email"
+          name="email"
           placeholder="Email"
           className="w-full p-3 rounded bg-surface border border-border"
         />
-        <input
-          name="phone"
-          placeholder="Phone"
-          className="w-full p-3 rounded bg-surface border border-border"
-        />
         <textarea
-          name="notes"
-          placeholder="Project description"
+          name="message"
+          placeholder="How can we help?"
           className="w-full p-3 rounded bg-surface border border-border"
         />
-        <fieldset className="space-y-2">
-          <legend className="font-medium">Which services are you interested in?</legend>
-          {services.map((s) => (
-            <label key={s} className="flex items-center gap-2 text-sm">
-              <input type="checkbox" name="services" value={s} />
-              <span>{s}</span>
-            </label>
-          ))}
-        </fieldset>
-        <Button type="submit" disabled={submitting}>
-          {submitting ? 'Submitting...' : 'Submit'}
-        </Button>
+        <Button type="submit">{sent ? 'Sent!' : 'Submit'}</Button>
       </form>
-    </section>
+      <div className="text-center mt-8 text-muted">
+        Or email us at <a href="mailto:info@mediawithamission.com" className="underline">info@mediawithamission.com</a>
+      </div>
+    </Section>
   );
 }
