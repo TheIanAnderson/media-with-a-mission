@@ -1,59 +1,73 @@
+/* Services section — diagonal background + slope-aligned sweep */
 .services-section {
-  --slant: 2rem;
+  --slant: 2rem;              /* diagonal height at right edge */
+  --sweep-gap: 3px;           /* visible strip of base color along the top */
   position: relative;
   overflow: hidden;
   color: var(--text);
   transition: color var(--transition);
 }
+
 .services-section > * {
   position: relative;
-  z-index: 2;
+  z-index: 2;                 /* keep content above background layers */
 }
+
+/* Base diagonal background */
 .services-section::before,
 .services-section::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 100%);
 }
+
 .services-section::before {
   background: var(--services-base);
+  /* diagonal top edge */
+  clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 100%);
   z-index: 0;
 }
+
+/* Yellow sweep layer (matches diagonal, leaves small top strip) */
 .services-section::after {
-  background: linear-gradient(
-    to right,
-    transparent calc(100% - 4px),
-    var(--services-sweep) calc(100% - 4px)
+  background: var(--services-sweep);
+  clip-path: polygon(
+    0 var(--sweep-gap),
+    100% calc(var(--slant) + var(--sweep-gap)),
+    100% 100%,
+    0 100%
   );
-  clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 100%);
-  transform: translateX(-100%);
-  transition: transform 150ms ease-out;
+  /* start off-screen, offset along slope so motion tracks the diagonal */
+  transform: translate(-101%, calc(-1 * var(--slant)));
+  transform-origin: left top;
+  transition: transform 100ms ease-in-out; /* faster, smooth in/out */
   z-index: 1;
 }
+
+/* Interaction states */
 .services-section:hover,
 .services-section:focus-within {
   color: var(--brand-ink);
 }
 .services-section:hover::after,
 .services-section:focus-within::after {
-  transform: translateX(0);
+  transform: translate(0, 0);
 }
+
+/* Reduced motion: no animation, show filled state */
 @media (prefers-reduced-motion: reduce) {
   .services-section::after {
     transition: none;
-    transform: translateX(0);
+    transform: none;
   }
 }
+
+/* Responsive slant */
 @media (min-width: 768px) {
-  .services-section {
-    --slant: 3rem;
-  }
+  .services-section { --slant: 3rem; }
 }
 @media (min-width: 1024px) {
-  .services-section {
-    --slant: 4rem;
-  }
+  .services-section { --slant: 4rem; }
 }
