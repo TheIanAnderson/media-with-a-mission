@@ -23,10 +23,14 @@
   z-index: 0;
 }
 .services-section::after {
-  background: var(--services-sweep);
-  clip-path: polygon(0 3px, 100% calc(var(--slant) + 3px), 100% 100%, 0 100%);
+  background: linear-gradient(
+    to right,
+    transparent calc(100% - 4px),
+    var(--services-sweep) calc(100% - 4px)
+  );
+  clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 100%);
   transform: translateX(-100%);
-  transition: transform 0.5s var(--transition);
+  transition: transform 150ms ease-out;
   z-index: 1;
 }
 .services-section:hover,
