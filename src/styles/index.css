@@ -22,12 +22,14 @@
   left: 50%;
   transform: translateX(-50%) scale(1);
   transform-origin: top left;
+  pointer-events: none;
 }
 
 body.logo-pinned .logo-lockup {
   top: 0;
   left: 1rem;
   transform: translate(0, 0) scale(0.25);
+  pointer-events: auto;
 }
 
 .toast {
@@ -61,43 +63,3 @@ body.logo-pinned .logo-lockup {
       transition: none;
     }
   }
-
-/* angled yellow section */
-.angled-section {
-  position: relative;
-  overflow: hidden;
-  color: var(--brand-ink);
-  transition: color var(--transition);
-}
-
-.angled-section::before,
-.angled-section::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  transform: skewY(-25deg);
-  transform-origin: top left;
-  z-index: -1;
-}
-
-.angled-section::before {
-  top: -25%;
-  background: var(--brand);
-}
-
-.angled-section::after {
-  top: calc(-25% + 3px);
-  background: var(--surface);
-  transform: skewY(-25deg) translateX(-100%);
-  transition: transform 0.5s var(--transition);
-}
-
-.angled-section:hover::after {
-  transform: skewY(-25deg) translateX(0);
-}
-
-.angled-section:hover {
-  color: var(--text);
-}
