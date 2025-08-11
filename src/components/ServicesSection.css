@@ -1,0 +1,55 @@
+.services-section {
+  --slant: 2rem;
+  position: relative;
+  overflow: hidden;
+  color: var(--text);
+  transition: color var(--transition);
+}
+.services-section > * {
+  position: relative;
+  z-index: 2;
+}
+.services-section::before,
+.services-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% var(--slant), 100% 100%, 0 100%);
+}
+.services-section::before {
+  background: var(--services-base);
+  z-index: 0;
+}
+.services-section::after {
+  background: var(--services-sweep);
+  clip-path: polygon(0 3px, 100% calc(var(--slant) + 3px), 100% 100%, 0 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--transition);
+  z-index: 1;
+}
+.services-section:hover,
+.services-section:focus-within {
+  color: var(--brand-ink);
+}
+.services-section:hover::after,
+.services-section:focus-within::after {
+  transform: translateX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .services-section::after {
+    transition: none;
+    transform: translateX(0);
+  }
+}
+@media (min-width: 768px) {
+  .services-section {
+    --slant: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .services-section {
+    --slant: 4rem;
+  }
+}
