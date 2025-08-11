@@ -1,24 +1,54 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../components/ui/Button';
 import OrbsBackground from '../components/OrbsBackground';
 import logoLight from '../assets/MWM-logo-light-mode.png';
 import logoDark from '../assets/MWM-logo-dark-mode.png';
+import useTheme from '../hooks/useTheme';
 
 export default function Home() {
-  const [theme, setTheme] = useState(
-    () => document.documentElement.dataset.theme || 'light',
-  );
-  const [scrolled, setScrolled] = useState(false);
+  const theme = useTheme();
+  const logoRef = useRef(null);
+  const [logoStyle, setLogoStyle] = useState({});
+  const [initialRect, setInitialRect] = useState(null);
+
   useEffect(() => {
-    const handler = (e) => setTheme(e.detail);
-    window.addEventListener('themechange', handler);
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('themechange', handler);
-      window.removeEventListener('scroll', onScroll);
+    if (logoRef.current) {
+      setInitialRect(logoRef.current.getBoundingClientRect());
+    }
+    const onScroll = () => {
+      const hasScrolled = window.scrollY > 50;
+      if (hasScrolled) {
+        const logo = logoRef.current;
+        const navLogo = document.getElementById('navbar-logo');
+        if (logo && navLogo) {
+          const rect = logo.getBoundingClientRect();
+          const navRect = navLogo.getBoundingClientRect();
+          setLogoStyle({
+            position: 'fixed',
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            transform: `translate(${navRect.left - rect.left}px, ${navRect.top - rect.top}px) scale(${navRect.width / rect.width})`,
+            opacity: 0,
+            transition: 'transform 300ms ease, opacity 300ms ease',
+            pointerEvents: 'none',
+          });
+        }
+      } else {
+        setLogoStyle({
+          position: 'absolute',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          opacity: 1,
+          transition: 'transform 300ms ease, opacity 300ms ease',
+        });
+      }
     };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
   const services = [
     {
@@ -57,18 +87,25 @@ export default function Home() {
   const logoSrc = theme === 'dark' ? logoDark : logoLight;
   return (
     <div>
-      <img
-        src={logoSrc}
-        alt="Media with a Mission"
-        className={`fixed z-40 transition-all duration-500 transform ${
-          scrolled
-            ? 'top-3 left-3 w-8 opacity-0 pointer-events-none'
-            : 'top-1/2 left-1/2 w-48 -translate-x-1/2 -translate-y-1/2 opacity-100'
-        }`}
-      />
-      <section className="relative overflow-hidden py-32 text-center">
         <OrbsBackground />
-        <div className="relative z-10 space-y-6 px-4">
+        <div className="relative z-10 flex flex-col items-center space-y-6 px-4">
+          <div
+            className="relative"
+            style={{ height: initialRect ? initialRect.height : undefined }}
+          >
+            <img
+              ref={logoRef}
+              src={logoSrc}
+              alt="Media with a Mission"
+              className="w-64"
+              style={logoStyle}
+              onLoad={() => {
+                if (logoRef.current) {
+                  setInitialRect(logoRef.current.getBoundingClientRect());
+                }
+              }}
+            />
+          </div>
           <h1 className="text-5xl font-display font-bold">
             Storytelling for Impact
           </h1>

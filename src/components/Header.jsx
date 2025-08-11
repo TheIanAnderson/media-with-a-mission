@@ -4,22 +4,11 @@ import { Menu, X } from 'lucide-react';
 import logoLight from '../assets/MWM-logo-light-mode.png';
 import logoDark from '../assets/MWM-logo-dark-mode.png';
 import ThemeToggle from './ThemeToggle';
+import useTheme from '../hooks/useTheme';
 
 export default function Header() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState(
-    () => document.documentElement.dataset.theme || 'light',
-  );
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handler = (e) => setTheme(e.detail);
-    window.addEventListener('themechange', handler);
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('themechange', handler);
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
@@ -41,6 +30,7 @@ export default function Header() {
           }`}
         >
           <img
+            id="navbar-logo"
             src={theme === 'dark' ? logoDark : logoLight}
             alt="Media with a Mission"
             className="h-8 w-auto"
