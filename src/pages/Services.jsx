@@ -1,38 +1,24 @@
-import { useState } from 'react';
-import Tab from '../components/ui/Tab';
-import Button from '../components/ui/Button';
-
-const data = {
-  'Story-Driven Video': {
-    desc: 'Short films that move people to act.',
-    bullets: ['Raise awareness', 'Boost donations', 'Share your mission'],
-  },
-  'Web Tools & Sites': {
-    desc: 'Squarespace or Next.js sites focused on outcomes.',
-    bullets: ['Fast launch', 'Metrics tracking', 'Flexible CMS'],
-  },
-  'UpGive: Event Giving Display': {
-    desc: 'Gamified giving displays for events.',
-    bullets: ['Real-time tally', 'Leaderboards', 'Audience engagement'],
-  },
-};
+import services from '../assets/data/services.json';
+import site from '../assets/data/site.json';
+import ServiceCard from '../components/ServiceCard';
+import Section from '../components/Section';
+import CTA from '../components/CTA';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function Services() {
-  const [active, setActive] = useState(Object.keys(data)[0]);
-  const current = data[active];
+  usePageMeta({ title: 'Services | Media with a Mission' });
   return (
-    <section className="max-w-3xl mx-auto py-24 px-4">
-      <h1 className="text-4xl font-display mb-8 text-center">Services</h1>
-      <Tab tabs={Object.keys(data)} active={active} onChange={setActive} />
-      <div className="space-y-4">
-        <p className="text-muted">{current.desc}</p>
-        <ul className="list-disc list-inside space-y-2 text-muted">
-          {current.bullets.map((b) => (
-            <li key={b}>{b}</li>
-          ))}
-        </ul>
-        <Button as="a" href="/contact">Start a Project</Button>
+    <Section className="max-w-6xl mx-auto">
+      <h1 className="text-3xl sm:text-4xl font-display font-bold text-center mb-6">Services</h1>
+      <p className="text-center text-lg text-muted max-w-3xl mx-auto mb-10">
+        {site.servicesIntro}
+      </p>
+      <div className="grid gap-6 md:grid-cols-3">
+        {services.map((s) => (
+          <ServiceCard key={s.slug} title={s.title} excerpt={s.excerpt} slug={s.slug} />
+        ))}
       </div>
-    </section>
+      <CTA />
+    </Section>
   );
 }

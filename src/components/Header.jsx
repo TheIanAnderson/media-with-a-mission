@@ -1,30 +1,29 @@
-import { Link, NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/MWM-logo-light-mode.png';
 import ThemeToggle from './ThemeToggle';
+import navItems from '../assets/data/navigation.json';
 
 export default function Header() {
+  const location = useLocation();
   const [open, setOpen] = useState(false);
-  const nav = [
-    { to: '/services', label: 'Services' },
-    { to: '/work', label: 'Work' },
-    { to: '/process', label: 'Process' },
-    { to: '/pricing', label: 'Pricing' },
-    { to: '/upgive', label: 'UpGive' },
-    { to: '/contact', label: 'Contact' },
-  ];
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      document.body.classList.add('logo-pinned');
+    }
+  }, [location.pathname]);
+
+  const nav = navItems;
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur border-b border-border">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-16">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Media with a Mission" className="h-8 w-auto" />
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-40 bg-bg/80 backdrop-blur border-b border-border">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-24">
+        <div className="w-28 h-24" aria-hidden="true" />
         <nav className="hidden md:flex gap-6">
           {nav.map((n) => (
             <NavLink
-              key={n.to}
-              to={n.to}
+              key={n.path}
+              to={n.path}
               className={({ isActive }) =>
                 `hover:text-brand ${isActive ? 'text-brand' : 'text-muted'}`
               }
@@ -48,8 +47,8 @@ export default function Header() {
         <div className="md:hidden bg-bg border-t border-border px-4 pb-4">
           {nav.map((n) => (
             <NavLink
-              key={n.to}
-              to={n.to}
+              key={n.path}
+              to={n.path}
               onClick={() => setOpen(false)}
               className="block py-2 text-muted hover:text-brand"
             >
