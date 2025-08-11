@@ -16,6 +16,20 @@
   }
 }
 
+/* logo lockup transition */
+.logo-lockup {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: top left;
+}
+
+body.logo-pinned .logo-lockup {
+  top: 0.75rem;
+  left: 1rem;
+  transform: translate(0, 0) scale(0.4);
+}
+
 .toast {
   position: fixed;
   bottom: 1rem;
