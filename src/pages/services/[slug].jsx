@@ -42,6 +42,13 @@ export default function ServiceDetail() {
         <h2 className="text-2xl font-semibold mb-4">Value Proposition</h2>
         <p className="text-muted">{detail.valueProp}</p>
       </section>
+      {detail.supportImage && (
+        <img
+          src={detail.supportImage.src}
+          alt={detail.supportImage.alt}
+          className="w-full rounded"
+        />
+      )}
       <Button as={Link} to="/contact" className="mt-4">
         {detail.ctaText}
       </Button>

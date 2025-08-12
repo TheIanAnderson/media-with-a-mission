@@ -3,7 +3,16 @@ import site from '../assets/data/site.json';
 import ServiceCard from '../components/ServiceCard';
 import Section from '../components/Section';
 import CTA from '../components/CTA';
+import videoIcon from '../assets/icons/service-video.svg';
+import websiteIcon from '../assets/icons/service-website.svg';
+import displayIcon from '../assets/icons/service-display.svg';
 import usePageMeta from '../hooks/usePageMeta';
+
+const iconMap = {
+  storytelling: videoIcon,
+  downgreat: websiteIcon,
+  upgive: displayIcon,
+};
 
 export default function Services() {
   usePageMeta({ title: 'Services | Media with a Mission' });
@@ -15,7 +24,13 @@ export default function Services() {
       </p>
       <div className="grid gap-6 md:grid-cols-3">
         {services.map((s) => (
-          <ServiceCard key={s.slug} title={s.title} excerpt={s.excerpt} slug={s.slug} />
+          <ServiceCard
+            key={s.slug}
+            title={s.title}
+            excerpt={s.excerpt}
+            slug={s.slug}
+            icon={iconMap[s.slug]}
+          />
         ))}
       </div>
       <CTA />

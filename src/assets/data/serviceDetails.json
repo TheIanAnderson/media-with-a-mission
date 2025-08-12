@@ -8,7 +8,11 @@
       "Cinematic Fundraising Film: A fully produced, 2–5 minute video optimized for fundraising events, donor outreach, and digital campaigns."
     ],
     "valueProp": "Our creative directors are trained to craft content that resonates without causing donor fatigue. Every frame and every word serve your mission—showcasing authentic stories backed by the metrics of transformation that inspire confidence and action.",
-    "ctaText": "Book your story consultation"
+    "ctaText": "Book your story consultation",
+    "supportImage": {
+      "src": "/services/service-support.webp",
+      "alt": "Supporting illustration"
+    }
   },
   "downgreat": {
     "overview": "Many nonprofits are stuck with beautiful but uneditable websites—locked into expensive retainers with developers who control every update. DownGreat fixes that. We design mission-focused, brand-aligned websites on easy-to-manage platforms like Squarespace and WordPress, so your team can make updates instantly without relying on outside help. The result: a site that’s visually compelling, donor-ready, and completely yours.",
@@ -20,7 +24,11 @@
       "Launch & Training: Step-by-step guidance so your team can confidently update and expand the site without ongoing developer costs."
     ],
     "valueProp": "DownGreat delivers professional, mission-aligned sites with the simplicity and control your team needs, eliminating costly retainers and long turnaround times.",
-    "ctaText": "Request a site plan"
+    "ctaText": "Request a site plan",
+    "supportImage": {
+      "src": "/services/service-support.webp",
+      "alt": "Supporting illustration"
+    }
   },
   "upgive": {
     "overview": "UpGive turns your fundraising events into immersive, high-energy experiences—enthusiastically aligned with your event’s theme or your nonprofit’s branding. Our large-screen, real-time displays highlight donor names, giving amounts, and team progress, creating an engaging, visual narrative that matches the event atmosphere and energizes generosity.",
@@ -32,6 +40,10 @@
       "On-Site Operation"
     ],
     "valueProp": "UpGive transforms fundraising from static recognition into an interactive experience that drives excitement and deeper engagement.",
-    "ctaText": "Reserve your event date"
+    "ctaText": "Reserve your event date",
+    "supportImage": {
+      "src": "/services/service-support.webp",
+      "alt": "Supporting illustration"
+    }
   }
 }

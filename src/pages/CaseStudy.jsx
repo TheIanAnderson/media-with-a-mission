@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getCaseBySlug } from '../lib/supabase';
 import Stat from '../components/ui/Stat';
 import Pill from '../components/ui/Pill';
+import casePlaceholder from '../assets/images/case-study-placeholder.webp';
 
 function renderMarkdown(md) {
   return md.split('\n').map((line, i) => {
@@ -34,14 +35,12 @@ export default function CaseStudy() {
 
   return (
     <article className="max-w-3xl mx-auto py-24 px-4 space-y-6">
-      {data.hero_url && (
-        <img
-          src={data.hero_url}
-          alt={data.title}
-          className="w-full h-64 object-cover rounded"
-          loading="lazy"
-        />
-      )}
+      <img
+        src={data.hero_url || casePlaceholder}
+        alt={data.title}
+        className="w-full h-64 object-cover rounded"
+        loading="lazy"
+      />
       <h1 className="text-4xl font-display">{data.title}</h1>
       <div className="flex gap-2 flex-wrap">
         {data.tags?.map((t) => (
