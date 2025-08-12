@@ -26,7 +26,7 @@ export default function Home() {
     const logo = document.querySelector('.logo-lockup img');
     const offset =
       heading && logo
-        ? heading.offsetTop - logo.getBoundingClientRect().height - 16
+        ? Math.max(0, heading.offsetTop - logo.getBoundingClientRect().height - 16)
         : 0;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -36,7 +36,7 @@ export default function Home() {
           document.body.classList.add('logo-pinned');
         }
       },
-      { rootMargin: `-${offset}px 0px 0px 0px` }
+      { rootMargin: `${-offset}px 0px 0px 0px` }
     );
     observer.observe(hero);
     return () => observer.disconnect();
