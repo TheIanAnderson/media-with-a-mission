@@ -4,7 +4,7 @@
     "slug": "storytelling",
     "excerpt": "High-impact fundraising films with strategic storytelling.",
     "heroImage": {
-      "src": "https://via.placeholder.com/1200x600?text=Storytelling",
+      "src": "/services/storytelling-hero.webp",
       "alt": "Story-Driven, Cinematic Storytelling"
     },
     "ctaText": "Book your story consultation"
@@ -14,7 +14,7 @@
     "slug": "downgreat",
     "excerpt": "Mission-focused websites your team can update instantly.",
     "heroImage": {
-      "src": "https://via.placeholder.com/1200x600?text=DownGreat",
+      "src": "/services/downgreat-hero.webp",
       "alt": "DownGreat – Websites That Put You in Control"
     },
     "ctaText": "Request a site plan"
@@ -24,7 +24,7 @@
     "slug": "upgive",
     "excerpt": "Large-screen, real-time displays that energize generosity.",
     "heroImage": {
-      "src": "https://via.placeholder.com/1200x600?text=UpGive",
+      "src": "/services/upgive-hero.webp",
       "alt": "UpGive – Live Giving Displays That Gamify Fundraising"
     },
     "ctaText": "Reserve your event date"

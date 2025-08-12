@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Section from '../components/Section';
 import Button from '../components/ui/Button';
 import usePageMeta from '../hooks/usePageMeta';
+import locationIcon from '../assets/icons/location.svg';
 
 export default function Contact() {
   usePageMeta({ title: 'Contact | Media with a Mission' });
@@ -38,6 +39,14 @@ export default function Contact() {
       </form>
       <div className="text-center mt-8 text-muted">
         Or email us at <a href="mailto:info@mediawithamission.com" className="underline">info@mediawithamission.com</a>
+        <div className="flex items-center justify-center gap-2 mt-2">
+          <img
+            src={locationIcon}
+            alt="Location icon"
+            className="w-4 h-4"
+          />
+          <span>Anytown, USA</span>
+        </div>
       </div>
     </Section>
   );
