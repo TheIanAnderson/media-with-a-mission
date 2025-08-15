@@ -46,22 +46,34 @@ export default function Home() {
 
   useEffect(() => {
     document.body.classList.remove('logo-pinned');
-    if (!('IntersectionObserver' in window) || !heroRef.current) {
+    const heroEl = heroRef.current;
+    const heading = heroEl?.querySelector('h1');
+    const logo = document.querySelector('.logo-lockup');
+
+    if (!heroEl || !heading || !logo) {
       document.body.classList.add('logo-pinned');
       return;
     }
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          document.body.classList.remove('logo-pinned');
-        } else {
-          document.body.classList.add('logo-pinned');
-        }
-      },
-      { threshold: 0.9 }
-    );
-    observer.observe(heroRef.current);
-    return () => observer.disconnect();
+
+    // Calculate where the large logo ends so we can pin before overlap
+    const largeLogoBottom = logo.offsetTop + logo.offsetHeight;
+
+    const handleScroll = () => {
+      const headingTop = heading.getBoundingClientRect().top;
+      if (headingTop <= largeLogoBottom + 10) {
+        document.body.classList.add('logo-pinned');
+      } else {
+        document.body.classList.remove('logo-pinned');
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   return (
