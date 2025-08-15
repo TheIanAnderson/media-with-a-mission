@@ -49,17 +49,18 @@ export default function Home() {
     const heroEl = heroRef.current;
     const heading = heroEl?.querySelector('h1');
     const logo = document.querySelector('.logo-lockup');
+    const headingContent = heading?.querySelector('.hero-heading-content') || heading;
 
-    if (!heroEl || !heading || !logo) {
+    if (!heroEl || !headingContent || !logo) {
       document.body.classList.add('logo-pinned');
       return;
     }
 
     // Calculate where the large logo ends so we can pin before overlap
-    const largeLogoBottom = logo.offsetTop + logo.offsetHeight;
+    const largeLogoBottom = logo.getBoundingClientRect().bottom;
 
     const handleScroll = () => {
-      const headingTop = heading.getBoundingClientRect().top;
+      const headingTop = headingContent.getBoundingClientRect().top;
       if (headingTop <= largeLogoBottom + 10) {
         document.body.classList.add('logo-pinned');
       } else {
