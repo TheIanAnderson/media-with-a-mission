@@ -56,10 +56,8 @@ export default function Home() {
       return;
     }
 
-    // Calculate where the large logo ends so we can pin before overlap
-    const largeLogoBottom = logo.getBoundingClientRect().bottom;
-
     const handleScroll = () => {
+      const largeLogoBottom = logo.getBoundingClientRect().bottom;
       const headingTop = headingContent.getBoundingClientRect().top;
       if (headingTop <= largeLogoBottom + 10) {
         document.body.classList.add('logo-pinned');
@@ -68,12 +66,13 @@ export default function Home() {
       }
     };
 
-    handleScroll();
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
+    window.addEventListener('load', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('load', handleScroll);
     };
   }, []);
 
