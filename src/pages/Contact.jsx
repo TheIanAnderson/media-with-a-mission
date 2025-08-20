@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Section from '../components/Section';
-import Button from '../components/ui/Button';
+import Button from '../components/Button';
 import usePageMeta from '../hooks/usePageMeta';
 
 export default function Contact() {

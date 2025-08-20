@@ -1,4 +1,4 @@
-import Button from './ui/Button';
+import Button from './Button';
 import { Link } from 'react-router-dom';
 
 export default function CTA({ text = 'Start a Project', to = '/contact' }) {
