@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import navItems from '../assets/data/navigation.json';
 
 export default function Header() {
   const location = useLocation();
@@ -14,7 +13,12 @@ export default function Header() {
     }
   }, [location.pathname]);
 
-  const nav = navItems;
+  const nav = [
+    { label: 'Services', path: '/services' },
+    { label: 'Work', path: '/work' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
+  ];
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-bg/80 backdrop-blur border-b border-border">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-24">

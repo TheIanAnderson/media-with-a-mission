@@ -1,16 +1,11 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { syncCases } from './lib/supabase';
 import { routes } from './router';
 import LogoLockup from './components/LogoLockup';
 
 export default function App() {
-  useEffect(() => {
-    syncCases();
-  }, []);
-
   return (
     <div className="min-h-screen bg-bg text-text">
       <LogoLockup />

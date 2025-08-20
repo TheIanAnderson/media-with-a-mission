@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import Button from './ui/Button';
+import Button from './Button';
 import { Link } from 'react-router-dom';
 
 const Hero = forwardRef(function Hero({ title, subtitle }, ref) {
