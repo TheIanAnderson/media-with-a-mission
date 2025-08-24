@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const firstLinkRef = useRef(null);
 
   useEffect(() => {
     if (location.pathname !== '/') {
@@ -14,13 +15,21 @@ export default function Header() {
   }, [location.pathname]);
 
   const nav = [
+    { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
     { label: 'Work', path: '/work' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ];
+
+  useEffect(() => {
+    if (open && firstLinkRef.current) {
+      firstLinkRef.current.focus();
+    }
+  }, [open]);
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-bg/80 backdrop-blur border-b border-border">
+      <a href="#main" className="skip-link">Skip to content</a>
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 h-24">
         <div className="w-28 h-24" aria-hidden="true" />
         <nav className="hidden md:flex gap-6">
@@ -36,7 +45,10 @@ export default function Header() {
             </NavLink>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
+          <Link to="/contact" className="hidden md:inline-flex btn btn-primary">
+            Book a discovery call
+          </Link>
           <ThemeToggle />
           <button
             className="md:hidden text-text"
@@ -49,16 +61,24 @@ export default function Header() {
       </div>
       {open && (
         <div className="md:hidden bg-bg border-t border-border px-4 pb-4">
-          {nav.map((n) => (
+          {nav.map((n, i) => (
             <NavLink
               key={n.path}
               to={n.path}
               onClick={() => setOpen(false)}
+              ref={i === 0 ? firstLinkRef : null}
               className="block py-2 text-muted hover:text-brand"
             >
               {n.label}
             </NavLink>
           ))}
+          <Link
+            to="/contact"
+            className="btn btn-primary w-full mt-2"
+            onClick={() => setOpen(false)}
+          >
+            Book a discovery call
+          </Link>
         </div>
       )}
     </header>

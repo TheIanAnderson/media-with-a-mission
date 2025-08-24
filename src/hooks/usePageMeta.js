@@ -13,6 +13,7 @@ export default function usePageMeta({ title, description, image }) {
     if (image) {
       setMeta('og:image', image, 'property');
     }
+    setMeta('robots', 'index,follow');
   }, [title, description, image]);
 }
 

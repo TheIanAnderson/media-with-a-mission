@@ -1,14 +1,27 @@
 import { Link } from 'react-router-dom';
+import MediaPlaceholder from './MediaPlaceholder';
 
-export default function ServiceCard({ title, excerpt, slug }) {
+export default function ServiceCard({ title, blurb, href, tags = [] }) {
   return (
     <Link
-      to={`/services/${slug}`}
-      className="block border border-border rounded-lg p-6 hover:shadow-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+      to={href}
+      className="card block overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow"
     >
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted mb-4">{excerpt}</p>
-      <span className="text-brand font-medium">Learn more →</span>
+      <MediaPlaceholder className="w-full" />
+      <div className="p-6 flex flex-col gap-2">
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-muted flex-1">{blurb}</p>
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {tags.map((t) => (
+              <span key={t} className="badge-terra">
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+        <span className="link-cta mt-2">Learn more →</span>
+      </div>
     </Link>
   );
 }
