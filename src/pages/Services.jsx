@@ -3,6 +3,7 @@ import { services } from '../components/ServicesSection';
 import Section from '../components/Section';
 import CTA from '../components/CTA';
 import usePageMeta from '../hooks/usePageMeta';
+import { Sparkles, Calendar, ArrowRight } from 'lucide-react';
 
 export default function Services() {
   usePageMeta({
@@ -16,7 +17,16 @@ export default function Services() {
 
   return (
     <div>
-      <Section title="Services that move supporters to act." subtitle={intro}>
+      <Section
+        overline={
+          <span className="flex items-center gap-1">
+            Services
+            <Sparkles className="w-4 h-4 opacity-80" aria-hidden="true" />
+          </span>
+        }
+        title="Services that move supporters to act."
+        subtitle={intro}
+      >
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <ServiceCard
@@ -25,13 +35,20 @@ export default function Services() {
               blurb={s.blurb}
               tags={s.tags}
               href={`/services/${s.slug}`}
+              icon={s.icon}
+              footerIcon={s.footerIcon}
             />
           ))}
         </div>
         <div className="mt-12">
           <CTA
             heading="Not sure where to begin?"
-            primary={{ label: 'Start with a 20-minute consult', href: '/contact' }}
+            primary={{
+              label: 'Start with a 20-minute consult',
+              href: '/contact',
+              icon: Calendar,
+              trailingIcon: ArrowRight,
+            }}
           />
         </div>
       </Section>

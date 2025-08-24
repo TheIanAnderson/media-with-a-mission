@@ -3,6 +3,19 @@ import { Link } from 'react-router-dom';
 import Section from '../components/Section';
 import Button from '../components/Button';
 import usePageMeta from '../hooks/usePageMeta';
+import {
+  Users,
+  Mail,
+  Building2,
+  Presentation,
+  Calendar,
+  DollarSign,
+  PenTool,
+  ArrowRight,
+  CheckCircle2,
+  Phone,
+  MapPin,
+} from 'lucide-react';
 
 export default function Contact() {
   usePageMeta({
@@ -27,7 +40,8 @@ export default function Contact() {
         <form onSubmit={handleSubmit} className="space-y-4 md:col-span-2">
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="name" className="block mb-1">
+              <label htmlFor="name" className="block mb-1 flex items-center gap-1">
+                <Users className="w-4 h-4" aria-hidden="true" />
                 Name *
               </label>
               <input
@@ -38,7 +52,8 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block mb-1">
+              <label htmlFor="email" className="block mb-1 flex items-center gap-1">
+                <Mail className="w-4 h-4" aria-hidden="true" />
                 Email *
               </label>
               <input
@@ -50,7 +65,8 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label htmlFor="org" className="block mb-1">
+              <label htmlFor="org" className="block mb-1 flex items-center gap-1">
+                <Building2 className="w-4 h-4" aria-hidden="true" />
                 Organization
               </label>
               <input
@@ -60,7 +76,8 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label htmlFor="project" className="block mb-1">
+              <label htmlFor="project" className="block mb-1 flex items-center gap-1">
+                <Presentation className="w-4 h-4" aria-hidden="true" />
                 Project type
               </label>
               <select
@@ -75,7 +92,8 @@ export default function Contact() {
               </select>
             </div>
             <div>
-              <label htmlFor="timeline" className="block mb-1">
+              <label htmlFor="timeline" className="block mb-1 flex items-center gap-1">
+                <Calendar className="w-4 h-4" aria-hidden="true" />
                 Timeline
               </label>
               <input
@@ -85,7 +103,8 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label htmlFor="budget" className="block mb-1">
+              <label htmlFor="budget" className="block mb-1 flex items-center gap-1">
+                <DollarSign className="w-4 h-4" aria-hidden="true" />
                 Budget range
               </label>
               <select
@@ -100,7 +119,8 @@ export default function Contact() {
             </div>
           </div>
           <div>
-            <label htmlFor="message" className="block mb-1">
+            <label htmlFor="message" className="block mb-1 flex items-center gap-1">
+              <PenTool className="w-4 h-4" aria-hidden="true" />
               Message
             </label>
             <textarea
@@ -111,16 +131,37 @@ export default function Contact() {
             />
           </div>
           <Button type="submit" variant="primary">
-            {sent ? 'Sent!' : 'Submit'}
+            {sent ? (
+              <span className="flex items-center gap-1">
+                <CheckCircle2 className="w-4 h-4" aria-hidden="true" /> Sent!
+              </span>
+            ) : (
+              <span className="flex items-center gap-1">
+                Submit
+                <ArrowRight className="w-4 h-4 ico-right" aria-hidden="true" />
+              </span>
+            )}
           </Button>
+          {sent && (
+            <p className="text-sm text-ok flex items-center gap-1 mt-2">
+              <CheckCircle2 className="w-4 h-4" aria-hidden="true" /> Message sent!
+            </p>
+          )}
         </form>
         <aside className="space-y-4">
           <div>
-            <p className="text-sm">Prefer email?</p>
+            <p className="text-sm flex items-center gap-1">
+              <Mail className="w-4 h-4" aria-hidden="true" /> Prefer email?
+            </p>
             <a href="mailto:info@mediawithamission.com" className="link-cta">
               info@mediawithamission.com
             </a>
-            <p className="text-xs text-muted">We typically reply within 2 business days.</p>
+            <p className="text-xs text-muted flex items-center gap-1">
+              <Phone className="w-4 h-4" aria-hidden="true" /> (555) 123-4567
+            </p>
+            <p className="text-xs text-muted flex items-center gap-1">
+              <MapPin className="w-4 h-4" aria-hidden="true" /> Anywhere, USA
+            </p>
           </div>
           <div className="space-y-2">
             <p className="font-semibold">Quick links</p>
