@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 import Section from '../components/Section';
 import MediaPlaceholder from '../components/MediaPlaceholder';
 import CTA from '../components/CTA';
+import FilterTabs from '../components/FilterTabs';
+import {
+  Sparkles,
+  Video as VideoIcon,
+  Presentation,
+  Globe2,
+  BarChart3,
+  ArrowRight,
+} from 'lucide-react';
 import usePageMeta from '../hooks/usePageMeta';
 
 const cases = [
@@ -47,7 +56,12 @@ const cases = [
 export default function Work() {
   usePageMeta({ title: 'Selected Work | Media with a Mission' });
   const [filter, setFilter] = useState('All');
-  const filters = ['All', 'Video', 'Events', 'Web'];
+  const filters = [
+    { label: 'All', icon: Sparkles },
+    { label: 'Video', icon: VideoIcon },
+    { label: 'Events', icon: Presentation },
+    { label: 'Web', icon: Globe2 },
+  ];
   const filtered = cases.filter((c) => filter === 'All' || c.type === filter);
 
   return (
@@ -56,17 +70,7 @@ export default function Work() {
         title="Selected work"
         subtitle="Sample outcomes from recent collaborations."
       >
-        <div className="flex justify-center gap-2 mb-8">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className={`btn btn-ghost ${filter === f ? 'underline' : ''}`}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
+        <FilterTabs tabs={filters} current={filter} onChange={setFilter} />
         <div className="grid gap-6 md:grid-cols-3">
           {filtered.map((c) => (
             <div key={c.title} className="card p-6 flex flex-col">
@@ -74,14 +78,21 @@ export default function Work() {
               <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
               <p className="text-muted mb-2">{c.summary}</p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {c.tags.map((t) => (
-                  <span key={t} className="badge-terra">
-                    {t}
-                  </span>
-                ))}
+                {c.tags.map((t) => {
+                  const TagIcon = tagIcons[t];
+                  return (
+                    <span key={t} className="badge-terra flex items-center gap-1">
+                      {TagIcon && (
+                        <TagIcon className="w-3 h-3" aria-hidden="true" />
+                      )}
+                      {t}
+                    </span>
+                  );
+                })}
               </div>
               <Link to="/work" className="btn btn-outline mt-auto">
                 View project
+                <ArrowRight className="w-4 h-4 ico-right" aria-hidden="true" />
               </Link>
             </div>
           ))}
@@ -89,10 +100,21 @@ export default function Work() {
         <div className="mt-12">
           <CTA
             heading="Want results like these?"
-            primary={{ label: 'Start a conversation', href: '/contact' }}
+            primary={{
+              label: 'Start a conversation',
+              href: '/contact',
+              trailingIcon: ArrowRight,
+            }}
           />
         </div>
       </Section>
     </div>
   );
 }
+
+const tagIcons = {
+  Video: VideoIcon,
+  Events: Presentation,
+  Web: Globe2,
+  Strategy: BarChart3,
+};

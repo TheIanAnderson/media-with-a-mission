@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
+import { Globe2, ShieldCheck } from 'lucide-react';
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="section border-t border-border text-sm">
       <div className="section-narrow space-y-6">
+        <p className="text-center flex items-center justify-center gap-1">
+          <Globe2 className="w-4 h-4 opacity-80" aria-hidden="true" /> Sitemap
+        </p>
         <nav className="flex flex-wrap justify-center gap-4">
           <Link to="/" className="hover:underline">
             Home
@@ -22,6 +26,15 @@ export default function Footer() {
             Contact
           </Link>
         </nav>
+        <div className="flex justify-center gap-4 text-xs items-center">
+          <ShieldCheck className="w-3 h-3 opacity-80" aria-hidden="true" />
+          <Link to="/privacy" className="hover:underline">
+            Privacy
+          </Link>
+          <Link to="/accessibility" className="hover:underline">
+            Accessibility
+          </Link>
+        </div>
         <form className="max-w-sm mx-auto flex gap-2">
           <input
             type="email"

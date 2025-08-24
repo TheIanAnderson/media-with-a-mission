@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
@@ -48,6 +48,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <Link to="/contact" className="hidden md:inline-flex btn btn-primary">
             Book a discovery call
+            <ArrowRight className="w-5 h-5 ico-right" aria-hidden="true" />
           </Link>
           <ThemeToggle />
           <button
@@ -55,7 +56,7 @@ export default function Header() {
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
-            {open ? <X /> : <Menu />}
+          {open ? <X /> : <Menu />}
           </button>
         </div>
       </div>
@@ -78,6 +79,7 @@ export default function Header() {
             onClick={() => setOpen(false)}
           >
             Book a discovery call
+            <ArrowRight className="w-5 h-5 ico-right" aria-hidden="true" />
           </Link>
         </div>
       )}
