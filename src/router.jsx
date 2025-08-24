@@ -11,18 +11,10 @@ const Contact = lazy(() => import('./pages/Contact'));
 export const routes = [
   { path: '/', element: <Home /> },
   { path: '/services', element: <Services /> },
-  {
-    path: '/services/storytelling',
-    element: <Service service={services.find((s) => s.slug === 'storytelling')} />,
-  },
-  {
-    path: '/services/downgreat',
-    element: <Service service={services.find((s) => s.slug === 'downgreat')} />,
-  },
-  {
-    path: '/services/upgive',
-    element: <Service service={services.find((s) => s.slug === 'upgive')} />,
-  },
+  ...services.map((s) => ({
+    path: `/services/${s.slug}`,
+    element: <Service service={s} />,
+  })),
   { path: '/work', element: <Work /> },
   { path: '/about', element: <About /> },
   { path: '/contact', element: <Contact /> },
